@@ -21,8 +21,10 @@ int main() {
     );
     
     
-    std::time_t now = std::time(nullptr);
-    uint32_t code = generateTotp(key, now);
-    std::cout << code << std::endl;  // Вывод 6-значного TOTP-кода
+    while (true) {
+        std::time_t now = std::time(nullptr);
+        uint32_t code = generateTotp(key, now);
+        std::cout << code << "\n";  // Вывод 6-значного TOTP-кода
+    }
     return 0;
 }

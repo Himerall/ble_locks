@@ -1,3 +1,6 @@
 [submodule "cpptotp"]
 	path = cpptotp
 	url = https://github.com/RavuAlHemio/cpptotp.git
+[submodule "cpp-base32"]
+	path = cpp-base32
+	url = https://github.com/madebits/cpp-base32.git

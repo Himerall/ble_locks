@@ -9,7 +9,8 @@
 				"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
-				"/Users/ju_stick/ble_locks/cpptotp/src/libcppotp",
+				"/Users/ju_stick/ble_locks/cpptotp/src/libcppotp/*.cpp",
+				"/Users/ju_stick/ble_locks/cpp-base32/*.cpp",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}"
 			],

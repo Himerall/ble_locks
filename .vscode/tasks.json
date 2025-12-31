@@ -9,6 +9,7 @@
 				"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
+				"/Users/ju_stick/ble_locks/cpptotp/src/libcppotp",
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}"
 			],
@@ -34,5 +35,6 @@
 			"group": "test", // Или любая другая группа, кроме "build"
 			"dependsOn": [ "C/C++: g++ build active file" ] // Зависимость от задачи сборки
 		}
+
 	]
 }

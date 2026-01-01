@@ -21,7 +21,8 @@ int main() {
     );
     
     std::cout << Bytes::toBase32(key);
-    if (Bytes::fromBase32(Bytes::toBase32(key)) == key) std::cout << "-1\n";
+    // if (Bytes::fromBase32(Bytes::toBase32(key)) == key) std::cout << "-1\n"
+    // ;
     std::time_t now = std::time(nullptr);
     uint32_t code = 1;
     uint32_t last_code = 0;

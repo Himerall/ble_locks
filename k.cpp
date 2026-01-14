@@ -6,11 +6,16 @@
 #include <ctime>
 #include <map>
 #include <random>
+#include <limits>
 #include <string>
 #include <thread>
 #include "cpptotp/src/libcppotp/bytes.h"
 #include "cpptotp/src/libcppotp/otp.h"
 #include "cpp-base32/Base32.h"
+
+using std::cin;
+using std::cout;
+using std::time_t;
 
 uint64_t step = 0;
 
@@ -57,10 +62,20 @@ int main() {
     std::cin.tie(nullptr);
     std::map<uint32_t, std::string>uids;
     while (true) {
-        std::cout << "Please, insert your key (or send '-' to generate new one): ";
-        std::string choice = "";
+        std::cout << "Please, insert your UID (or send 0 to generate new one): ";
+        uint32_t choice = 0;
         std::cin >> choice;
-        if (choice == "-"){
+        
+        if (cin.fail()) {   
+            cin.clear();
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            choice = 0;
+            std::cout<<"!   You typed wrong UID    !\n";
+            continue;
+        }
+
+        if (choice == 0){
+            choice = 0;
             // std::cout << "\n:";
             using namespace CppTotp;
             // // std::cout << rand_nums(20) << "\n";
@@ -95,13 +110,19 @@ int main() {
             std::cout.fill('0'); std::cout.width(12);
             std::cout << generateTotp(key, now) << "\n";
             std::cout.fill(' '); std::cout.width(0);
-        } else {
+            uids[rand_totp_now]=key_str;
+        } else if (!uids[choice].empty()){
             // std::cout << "\nL";
-            key = CppTotp::Bytes::fromBase32(choice);
-            std::cout << "Please, insert UID: ";
-            std::cout << "Please, insert time in unixstamp: ";
-            std::time_t now = 0;
-            std::cin >> now;
+            using namespace std;
+            cout << "Please, insert time in unixstamp: ";
+            time_t now = 0;
+            cin >> now;
+            cout << "UID: " << choice << "\nKey: " << uids[choice] << "\nTime: " << now << "\nNum key: ";
+            std::cout.fill('0'); std::cout.width(12);
+            std::cout << generateTotp(CppTotp::Bytes::fromBase32(uids[choice]), now) << "\n";
+        } else {
+            choice = 0;
+            std::cout<<"!   You typed wrong UID    !\n";
         }
         // uint32_t code = 1;
         // uint32_t last_code = 0;
@@ -128,3 +149,4 @@ int main() {
     }
     return 0;
 }
+
